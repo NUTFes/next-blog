@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  app:
+    container_name: 'app'
+    build:
+      context: .docker
+      dockerfile: app.Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./app:/app/next-project
+    command: npm run dev
+    env_file:
+      - hackmd.env
+
+  sb:
+    container_name: 'sb'
+    build:
+      context: .docker
+      dockerfile: app.Dockerfile
+    ports:
+      - '6006:6006'
+    volumes:
+      - ./app:/app/next-project
+    command: npm run storybook
